@@ -9,3 +9,166 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Ubigeo {
+  ubigeo_id    Int        @id @default(autoincrement())
+  departamento String
+  provincia String
+  distrito String
+  ubigeo2 Int
+  usu_creacion Int?
+  fec_creacion DateTime?
+  usu_movimiento Int?
+  fec_modificacion DateTime?
+  medicos Medicos[]
+  pacientes Pacientes[]
+}
+
+model Roles {
+  rol_id    Int        @id @default(autoincrement())
+  descripcion String   @unique
+  usu_creacion Int?
+  fec_creacion DateTime?
+  usu_movimiento Int?
+  fec_modificacion DateTime?
+  usuarios Usuarios[]
+  permisos  RolesPermisos[]
+}
+
+model RolesPermisos {
+  rol_permiso_id       Int   @id @default(autoincrement())
+  rol      Roles @relation(fields: [rol_id], references: [rol_id])
+  permiso  Permisos  @relation(fields: [permiso_id], references: [permiso_id])
+  rol_id Int
+  permiso_id  Int
+
+  @@index([rol_id, permiso_id])
+}
+
+model Permisos {
+  permiso_id    Int        @id @default(autoincrement())
+  descripcion String @unique
+  usu_creacion Int?
+  fec_creacion DateTime?
+  usu_movimiento Int?
+  fec_modificacion DateTime?
+  roles RolesPermisos[]
+}
+
+model Usuarios {
+  usuario_id    Int        @id @default(autoincrement())
+  nombre String
+  usuario String @unique
+  password String
+  rol Roles? @relation(fields: [rol_id], references: [rol_id])
+  rol_id Int?
+  usu_creacion Int?
+  fec_creacion DateTime?
+  usu_movimiento Int?
+  fec_modificacion DateTime?
+  medicos Medicos[]
+}
+
+model Especialidad {
+  especialidad_id    Int        @id @default(autoincrement())
+  descripcion String
+  estado Boolean
+  usu_creacion Int?
+  fec_creacion DateTime?
+  usu_movimiento Int?
+  fec_modificacion DateTime?
+  medicos Medicos[]
+}
+
+model Servicios {
+  servicio_id    Int        @id @default(autoincrement())
+  descripcion String
+  estado Boolean
+  usu_creacion Int?
+  fec_creacion DateTime?
+  usu_movimiento Int?
+  fec_modificacion DateTime?
+  medicos Medicos[]
+  citas Citas[]
+}
+
+model Medicos {
+  medico_id   Int        @id @default(autoincrement())
+  med_paterno String
+  med_materno String
+  med_nombres String
+  cmp String
+  rne String
+  sexo String
+  tipo_documento Int
+  nro_documento String
+  telefono String
+  correo String
+  direccion String
+  observacion String
+  usuario_id Int
+  ubigeo_id Int
+  especialidad_id Int
+  servicio_id Int
+  estado Boolean
+  usu_creacion Int?
+  fec_creacion DateTime?
+  usu_movimiento Int?
+  fec_modificacion DateTime?
+  citas Citas[]
+  usuarios Usuarios @relation(fields: [usuario_id], references: [usuario_id])
+  ubigeo Ubigeo @relation(fields: [ubigeo_id], references: [ubigeo_id])
+  especialidad Especialidad @relation(fields: [especialidad_id], references: [especialidad_id])
+  servicio Servicios @relation(fields: [servicio_id], references: [servicio_id])
+}
+
+model Titular {
+  titular_id    Int        @id @default(autoincrement())
+  tit_paterno String
+  tit_materno String
+  tit_nombres String
+  sexo String
+  tipo_documento Int
+  nro_documento String
+  telefono String
+  direccion String
+  observacion String
+  pacientes Pacientes[]
+}
+
+model Citas{
+  citas_id Int      @id @default(autoincrement())
+  historia Int
+  ordnum Int
+  fecha_cita DateTime
+  observacion String
+  servicio_id Int
+  medico_id Int
+  servicios Servicios @relation(fields: [servicio_id], references: [servicio_id])
+  medicos Medicos @relation(fields: [medico_id], references: [medico_id])
+  pacientes Pacientes @relation(fields: [historia], references: [historia])
+}
+
+model Pacientes {
+  historia    Int        @id @default(autoincrement())
+  pac_paterno String
+  pac_materno String
+  pac_nombres String
+  sexo String
+  tipo_documento Int
+  nro_documento String
+  fecha_nacimiento DateTime
+  telefono String
+  correo String
+  direccion String
+  observacion String
+  ubigeo_id Int
+  titular_id Int
+  usu_creacion Int?
+  fec_creacion DateTime?
+  usu_movimiento Int?
+  fec_modificacion DateTime?
+  ubigeo Ubigeo @relation(fields: [ubigeo_id], references: [ubigeo_id])
+  titular Titular @relation(fields: [titular_id], references: [titular_id])
+  citas Citas[]
+}
