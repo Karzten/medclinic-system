@@ -11,14 +11,14 @@ datasource db {
 }
 
 model Ubigeo {
-  ubigeo_id    Int        @id @default(autoincrement())
+  ubigeo    Int        @id
   departamento String
   provincia String
   distrito String
   ubigeo2 Int
   usu_creacion Int?
   fec_creacion DateTime?
-  usu_movimiento Int?
+  usu_modificacion Int?
   fec_modificacion DateTime?
   medicos Medicos[]
   pacientes Pacientes[]
@@ -29,7 +29,7 @@ model Roles {
   descripcion String   @unique
   usu_creacion Int?
   fec_creacion DateTime?
-  usu_movimiento Int?
+  usu_modificacion Int?
   fec_modificacion DateTime?
   usuarios Usuarios[]
   permisos  RolesPermisos[]
@@ -50,7 +50,7 @@ model Permisos {
   descripcion String @unique
   usu_creacion Int?
   fec_creacion DateTime?
-  usu_movimiento Int?
+  usu_modificacion Int?
   fec_modificacion DateTime?
   roles RolesPermisos[]
 }
@@ -64,7 +64,7 @@ model Usuarios {
   rol_id Int?
   usu_creacion Int?
   fec_creacion DateTime?
-  usu_movimiento Int?
+  usu_modificacion Int?
   fec_modificacion DateTime?
   medicos Medicos[]
 }
@@ -75,7 +75,7 @@ model Especialidad {
   estado Boolean
   usu_creacion Int?
   fec_creacion DateTime?
-  usu_movimiento Int?
+  usu_modificacion Int?
   fec_modificacion DateTime?
   medicos Medicos[]
 }
@@ -86,7 +86,7 @@ model Servicios {
   estado Boolean
   usu_creacion Int?
   fec_creacion DateTime?
-  usu_movimiento Int?
+  usu_modificacion Int?
   fec_modificacion DateTime?
   medicos Medicos[]
   citas Citas[]
@@ -101,7 +101,7 @@ model Medicos {
   rne String
   sexo String
   tipo_documento Int
-  nro_documento String
+  nro_documento String @unique
   telefono String
   correo String
   direccion String
@@ -113,11 +113,11 @@ model Medicos {
   estado Boolean
   usu_creacion Int?
   fec_creacion DateTime?
-  usu_movimiento Int?
+  usu_modificacion Int?
   fec_modificacion DateTime?
   citas Citas[]
   usuarios Usuarios @relation(fields: [usuario_id], references: [usuario_id])
-  ubigeo Ubigeo @relation(fields: [ubigeo_id], references: [ubigeo_id])
+  ubigeo Ubigeo @relation(fields: [ubigeo_id], references: [ubigeo])
   especialidad Especialidad @relation(fields: [especialidad_id], references: [especialidad_id])
   servicio Servicios @relation(fields: [servicio_id], references: [servicio_id])
 }
@@ -166,9 +166,9 @@ model Pacientes {
   titular_id Int
   usu_creacion Int?
   fec_creacion DateTime?
-  usu_movimiento Int?
+  usu_modificacion Int?
   fec_modificacion DateTime?
-  ubigeo Ubigeo @relation(fields: [ubigeo_id], references: [ubigeo_id])
+  ubigeo Ubigeo @relation(fields: [ubigeo_id], references: [ubigeo])
   titular Titular @relation(fields: [titular_id], references: [titular_id])
   citas Citas[]
 }
