@@ -15,14 +15,14 @@
             </div>
             <div class="login-main ">
               <form class="theme-form">
-                <h4>Sign in to account</h4>
-                <p>Enter your email & password to login</p>
+                <h4>Bienvenido</h4>
+                <p>Ingresa tus credenciales para acceder</p>
                 <div class="form-group">
-                  <label class="col-form-label">Email Address</label>
-                  <input class="form-control" type="email" required="" placeholder="Test@gmail.com" />
+                  <label class="col-form-label">Usuario</label>
+                  <input class="form-control" type="email" required="" placeholder="Ingresa tu contraseña" />
                 </div>
                 <div class="form-group">
-                  <label class="col-form-label">Password</label>
+                  <label class="col-form-label">Contraseña</label>
                   <div class="form-input position-relative">
 
                     <input class="form-control" :type="active ? 'password' : 'text'" name="login[password]" required=""
@@ -33,28 +33,14 @@
                 <div class="form-group mb-0">
                   <div class="checkbox p-0">
                     <input id="checkbox1" type="checkbox" />
-                    <label class="text-muted" for="checkbox1">Remember password</label>
+                    <label class="text-muted" for="checkbox1">Recordar credenciales</label>
                   </div>
                   <router-link to="/">
                     <button class="btn btn-primary btn-block w-100">
-                      Sign in
+                      Iniciar Sesión
                     </button>
                   </router-link>
                 </div>
-                <h6 class="text-muted mt-4 or">Or Sign in with</h6>
-                <div class="social mt-4">
-                  <div class="btn-showcase"><a class="btn btn-light" href="https://www.linkedin.com/login"
-                      target="_blank"><vue-feather class="txt-linkedin" type="linkedin"></vue-feather>LinkedIn </a><a
-                      class="btn btn-light" href="https://twitter.com/login?lang=en" target="_blank"><vue-feather
-                        class="txt-twitter" type="twitter"></vue-feather>twitter</a><a class="btn btn-light"
-                      href="https://www.facebook.com/" target="_blank"><vue-feather class="txt-fb"
-                        type="facebook"></vue-feather>facebook</a></div>
-                </div>
-                <p class="mt-4 mb-0">
-                  Don't have account?<router-link class="ms-2" tag="a" to="/auth/register">
-                    Create Account
-                  </router-link>
-                </p>
               </form>
             </div>
           </div>
