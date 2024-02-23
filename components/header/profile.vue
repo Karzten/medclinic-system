@@ -9,28 +9,20 @@
       <div class="media-body">
         <span>Emay Walter</span>
         <p class="mb-0 font-roboto">
-          Admin <i class="middle fa fa-angle-down"></i>
+          Rol <i class="middle fa fa-angle-down"></i>
         </p>
       </div>
     </div>
     <ul class="profile-dropdown onhover-show-div">
       <li>
-        <a href="#"><vue-feather type="user"></vue-feather><span>Account </span></a>
+        <a href="#"><vue-feather type="user"></vue-feather><span>Cuenta </span></a>
       </li>
       <li>
-        <a href="#"><vue-feather type="mail"></vue-feather><span>Inbox</span></a>
-      </li>
-      <li>
-        <a href="#"
-          ><vue-feather type="file-text"></vue-feather><span>Taskboard</span></a
-        >
-      </li>
-      <li>
-        <a href="#"><vue-feather type="settings"></vue-feather><span>Settings</span></a>
+        <a href="#"><vue-feather type="settings"></vue-feather><span>Configuración</span></a>
       </li>
       <li>
         <a href="#"
-          ><vue-feather type="log-in"></vue-feather><span>Log out</span></a
+          ><vue-feather type="log-in"></vue-feather><span>Cerrar Sesión</span></a
         >
       </li>
     </ul>
